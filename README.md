@@ -1,6 +1,7 @@
 # fapfb
 This project was created with 964712. This is simple script to support working with Facebook.com. Polish instruction is inside program. In file linki_wydarzen.txt are only exaples links. In file raport.txt is examle raport for one event. Prgram is still creates so it can include bugs. 
-If you want use it you must clone or download this repository
+
+If you want use it you must clone or download this repository.
 You have to install Python no less than 3.7.
 On this moment program works only with Mozilla Firefox.
 When you installed Pthon you must install selenium modules. Run cmd and enter: 'python' and press Enter. You should see version you python. For example: Python 3.7.3. Remember, can't be less than 3.7... After that press Ctrl+z and Enter on you keyboart to exit from Python or write in console: 'exit()'.

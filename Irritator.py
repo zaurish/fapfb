@@ -4,13 +4,14 @@
 from sys import path
 from modules import modules, menu, engine
 from selenium.common.exceptions import InvalidArgumentException
+from selenium.webdriver.common.keys import Keys
 from selenium import webdriver
 
 path.append('..\\modules')
 path.append('..\\config')
 
 listaWydarzen = []
-optionsList = [1,2,3,4,5]
+optionsList = [1,2,3,8,9,0]
 flag = True
 
 menu.wyswietlWstep()
@@ -18,13 +19,15 @@ menu.wyswietlWstep()
 while flag:
     menu.wyswietlMenuGlowne()
     try:
-        p = int(input())
+        p = int(input("--> "))
     except Exception:
         exit()
 
     if p not in optionsList:
+        print("No akurat takej opcji to nie mam!")
         exit()
-    elif p == 1: # full download
+
+    if p == 1: # full download
         modules.pobierzDaneZPliku(listaWydarzen) #pobranie zawartosci pliku wejsciowego do listy wydarzen
         allWydarzen = len(listaWydarzen) #Utworzenie licznika wydarzeń
         licznik = 1
@@ -50,14 +53,19 @@ while flag:
         except AssertionError:
             print("Wprowadzony adres url wydaje sie byc za krotki. Sprawdz jego porawnosc i sprobuj jeszcze raz")
             input("\nWcisnij Enter aby kontynuowac...")
-
     elif p == 3:
+        modules.pobierzDaneZPliku(listaWydarzen)
+        browser = webdriver.Firefox()
+        modules.logowanieDoStrony(browser, timesleep = 3)
+        for wydarzenie in listaWydarzen:
+            browser.execute_script("window.open('{}')".format('{}'.format(wydarzenie)))
+    elif p == 8:
         menu.firstUseInstruction()
         input("\nWcisnij Enter aby kontynuowac...")
-    elif p == 4:
+    elif p == 9:
         menu.useInstruction()
         input("\nWcisnij Enter aby kontynuowac...")
-    elif p == 5:
+    elif p == 0:
         menu.aboutIrritator()
         input("\nWcisnij Enter aby kontynuowac...")
 

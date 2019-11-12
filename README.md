@@ -1,4 +1,27 @@
 # fapfb
+ver 0.9.1 November 2019
+
+Hello in next version fapfb!
+
+In this update:
+
+- fixed some bugs
+
+- added 3rd function to open all events in new tabs
+
+- after works program automatically opens raport file
+
+
+In future:
+
+- whutsupp support
+
+- sending email trought lotus
+
+
+
+
+ver 0.9
 This project was created by 964712. This is simple script to support working with Facebook.com. Polish instruction is inside program. In file linki_wydarzen.txt there are only examples links. In file raport.txt there is examle report about one event. Program is still created so it may contain bugs. 
 
 If you want to use it you have to clone or download this repository.

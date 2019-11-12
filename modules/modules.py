@@ -83,7 +83,7 @@ def pobierzDaneLogowania(credential):
     elif credential == 'password':
         return cred[1]
 
-def logowanieDoStrony(browser):
+def logowanieDoStrony(browser, timesleep = 8):
     try:
         browser.get('https://pl-pl.facebook.com/')
         title = browser.title
@@ -96,7 +96,7 @@ def logowanieDoStrony(browser):
         passElem = browser.find_element_by_id('pass')
         passElem.send_keys(pobierzDaneLogowania(credential='password'))
         emailElem.submit()
-        time.sleep(10)
+        time.sleep(timesleep)
     except ErrorLoginFbException:
         terminate(browser)
     except ErrorLoginOrPassFbException:

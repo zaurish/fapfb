@@ -1,4 +1,4 @@
-import time
+import time, os
 from selenium import webdriver
 from modules import modules
 
@@ -43,7 +43,7 @@ def downloadEvent(browser, listaWydarzen, licznik=1, allWydarzen=1):
         licznik += 1
 
     modules.zamknijPlikRaportu(raport)
-
     print("\nProgram zakończył pracę\n")
     print("Zgranych wydarzeń: " + str(licznik - 1) + "/" + str(allWydarzen))
+    os.system("notepad raport.txt")
     browser.close()

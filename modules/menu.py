@@ -1,15 +1,17 @@
 def wyswietlWstep():
-    print("Witaj w programie Irritator v. 0.8.3")
+    print("Witaj w programie Irritator v. 0.9.1 Nov 2019")
     print("Autorem programu jest: Kamil Kolodziejczyk")
-    print("Program sluży do tworzenia raportów wydarzeń publikowanych w portalu facebook.com\n")
+    print("Program sluży do tworzenia raportów wydarzeń publikowanych w portalu facebook.com")
+    print("Nie zapomnij sprawdzić czy nie ma nowej wersji na stronie: https://github.com/zaurish/fapfb\n")
 
 def wyswietlMenuGlowne():
     print("Wciśnij klawisz w celu wyboru funkcji programu: \n")
     print("1 - Generuj raport dla wszystkich wydarzeń")
     print("2 - Generuj raport dla pojedynczego wyarzenia")
-    print("3 - Wyświetl instrukcje przed pierwszym uruchomieniem programu")
-    print("4 - Wyświetl instrukcje obsługi programu")
-    print("5 - O programie")
+    print("3 - Otwórz wszystkie wydarzenia w oddzielnych kartach")
+    print("8 - Wyświetl instrukcje przed pierwszym uruchomieniem programu")
+    print("9 - Wyświetl instrukcje obsługi programu")
+    print("0 - O programie")
     print("Każda inna opcja zakończy pracę programu")
 
 def firstUseInstruction():

@@ -1,7 +1,6 @@
 import os, time
 from selenium.common.exceptions import WebDriverException, NoSuchElementException
 
-
 #Własne wyjątki:
 class ErrorLoginFbException(Exception): #Błąd logowania na stronie fb
     def __init__(self):
@@ -42,7 +41,7 @@ def zamknijPlikRaportu(raport):
         print("\nNiektore dane mogly nie zostac prawidlowo zapisane.")
         print("\nUpewnij się przed publikacją raportu o jego aktualnosci.")
 
-def pobierzDaneZPliku(listaWydarzen):
+def pobierzLinkiWydarzen(listaWydarzen):
     if os.path.isfile('linki_wydarzen.txt'):
         with open('linki_wydarzen.txt', 'r', encoding = "utf-8") as zawartosc:
             for linia in zawartosc:
@@ -116,7 +115,7 @@ def pobierzTytulOrganizatorzy(browser):
     komunikat = "\nRaport zostanie wygenerowany, jednak w miejscu tytulu dla tego wydarzenia\n" \
             "pojawi sie informacja o jego braku. Mozesz sprobowac go wpisac recznie przed publikacja raportu"
     try:
-       tytul = browser.find_element_by_class_name("_5gmw")
+       tytul = browser.find_element_by_class_name("_5gmx")
        tytul = tytul.text
        if tytul == '': #jezeli tytuł jest pusty wywołuje wyjatek
           raise ErrorDownloadElement(x = 'tytuł i organzatorzy')
@@ -127,7 +126,7 @@ def pobierzTytulOrganizatorzy(browser):
     except ErrorDownloadElement:
         browser.refresh()
         time.sleep(7)
-        tytul = browser.find_element_by_class_name("_5gmw")
+        tytul = browser.find_element_by_class_name("_5gmx")
     except Exception as e:
         print("Wystąpil blad: ", e)
         print(komunikat)
@@ -140,6 +139,9 @@ def pobierzDataCzasMiejsce(browser, temp):
                 "lub czasu dla tego wydarzenia. Mozesz sprobowac go wpisac recznie przed publikacja raportu"
     try:
         ids = browser.find_elements_by_class_name('_xkh')  # pobiera wszystkie elementy do listy z klasy
+        print(len(ids))
+        print(ids[0].text)
+        print(ids[1].text)
         if len(ids) != 2:
             raise ErrorDownloadElement()
         if temp == 'czas':
@@ -148,7 +150,7 @@ def pobierzDataCzasMiejsce(browser, temp):
             i = ids[1].text
         return i
     except NoSuchElementException:
-        print("Nie zaleziono nazwy wydarzenia na stronie!\n Sprawdź czy opis istnieje!")
+        print("Nie zaleziono daty wydarzenia na stronie!\n Sprawdź czy ona istnieje!")
         print(komunikat)
         return info
     except ErrorDownloadElement:
@@ -217,3 +219,26 @@ def sprawdzPoprawnoscDanych(dana):
     if dana == '':
         dana = x
         return dana
+
+def pobierzDaneZPliku(listakontaktow):
+    if os.path.isfile('..\\config\\cont.txt'):
+        with open('..\\config\\cont.txt', 'r', encoding = "utf-8") as zawartosc:
+            for linia in zawartosc:
+                linia = linia.replace("\n", "") #usuwa znaki konca linii
+                linia = linia.replace("\r", "") #usuwa znaki konca linii
+                listakontaktow.append(linia)
+    else:
+        print("Plik z danymi wejściowymi nie istnieje!!!")
+        print("\nByc moze znajduje sie on w blednej lokalizacji lub zostal usuniety")
+        terminate()
+    if len(listakontaktow) == 0: #jezeli lista jest pusta zakoncz działanie programu
+        print("Plik wejsciowy nie zawiera linków wydarzen")
+        terminate()
+    else:
+        return listakontaktow
+    return listakontaktow
+
+def pobierzCalaZawartoscPliku(nazwaPliku):
+    with open(nazwaPliku, 'r', encoding = "utf-8") as obiektPliku:
+        tresc = obiektPliku.read()
+        return tresc

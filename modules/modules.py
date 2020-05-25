@@ -139,9 +139,9 @@ def pobierzDataCzasMiejsce(browser, temp):
                 "lub czasu dla tego wydarzenia. Mozesz sprobowac go wpisac recznie przed publikacja raportu"
     try:
         ids = browser.find_elements_by_class_name('_xkh')  # pobiera wszystkie elementy do listy z klasy
-        print(len(ids))
-        print(ids[0].text)
-        print(ids[1].text)
+        # print(len(ids))
+        # print(ids[0].text)
+        # print(ids[1].text)
         if len(ids) != 2:
             raise ErrorDownloadElement()
         if temp == 'czas':

@@ -1,4 +1,11 @@
 # fapfb
+ver 0.9.1_prototype
+Hello
+this is small upadt for fapfb because fb changed some on webside. I'm working on new full update.
+Please be carefull because this version has bugs.
+This upadte does that program working.
+
+
 ver 0.9.1 November 2019
 
 Hello in next version fapfb!

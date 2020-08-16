@@ -2,15 +2,9 @@ import os, time
 from selenium.common.exceptions import WebDriverException, NoSuchElementException
 
 #Własne wyjątki:
-class ErrorLoginFbException(Exception): #Błąd logowania na stronie fb
-    def __init__(self):
-        super().__init__("Błąd: Wystąpio niepowodzenie ładowania portalu facebook.com")
-        print("Błąd: Wystąpio niepowodzenie ładowania portalu facebook.com")
-class ErrorLoginOrPassFbException(Exception): #Niepoprawne login lub hsło
-    def __init__(self):
-        super().__init__("Błąd: Login lub hasło do profilu są błędne. Sprawdź dane logowania")
-        print("Błąd: Login lub hasło do profilu są błędne. Sprawdź dane logowania")
-class ErrorDownloadElement(Exception): #Pusty element
+
+class ErrorDownloadElement(Exception):
+    """Obsługa błędu związanego z pobraniem pstego elementu wydarzenia"""
     def __init__(self, x = 'elementu'):
         super().__init__("Błąd nie pobrano " + x + " wydarzenia")
         print("Błąd nie pobrano " + x + " wydarzenia. Ponawianie próby ...")
@@ -60,55 +54,6 @@ def pobierzLinkiWydarzen(listaWydarzen):
     else:
         return listaWydarzen
     return listaWydarzen
-
-def pobierzDaneLogowania(credential):
-    cred = []
-    if os.path.isfile('config\\credentials.txt'):
-        with open('config\\credentials.txt', 'r', encoding= "utf-8") as zawartosc:
-            for linia in zawartosc:
-                linia = linia.replace("\n", "")
-                linia = linia.replace("\r", "")
-                cred.append(linia)
-    else:
-        print("Plik z danymi logowania nie istnieje!!!")
-        print("\nW folerze o nazwie \"config\" powinien się znajdowac plik txt o nazwie \"credentials.txt\",")
-        print("\nz zawartoscia twojego loginu i hasla do konta facebook.")
-        terminate()
-    if len(cred) < 2:
-        print("W pliku credentials.txt brak jest danych logowania do portalu fb, lub sa niepoprawnie wpisane.")
-        terminate()
-    if credential == 'login':
-        return cred[0]
-    elif credential == 'password':
-        return cred[1]
-
-def logowanieDoStrony(browser, timesleep = 8):
-    try:
-        browser.get('https://pl-pl.facebook.com/')
-        title = browser.title
-        if "Facebook – zaloguj się lub zarejestruj" != title:
-            raise ErrorLoginFbException
-        elif "Zaloguj się do Facebooka | Facebook" == title:
-            raise ErrorLoginOrPassFbException
-        emailElem = browser.find_element_by_id('email')
-        emailElem.send_keys(pobierzDaneLogowania(credential='login'))
-        passElem = browser.find_element_by_id('pass')
-        passElem.send_keys(pobierzDaneLogowania(credential='password'))
-        emailElem.submit()
-        time.sleep(timesleep)
-    except ErrorLoginFbException:
-        terminate(browser)
-    except ErrorLoginOrPassFbException:
-        terminate(browser)
-    except WebDriverException:
-        print("Błąd: Wystąpio niepowodzenie ładowania strony facebook.com. Probem może tkwić w połączeniu z Internetem.\n"
-              "Sprawdz polaczenie lub sprobuj za chwile")
-        terminate(browser)
-    except Exception as e:
-        print("Wystąpil blad: ", e)
-        terminate(browser)
-    else:
-        print("Poprawnie zalogowano do profilu\nPracuje...\n")
 
 def pobierzTytulOrganizatorzy(browser):
     info = 'Brak nazwy wydarzenia oraz informacji o organizatorach'
@@ -212,31 +157,15 @@ def pobierzOpis(browser):
     except Exception as e:
         print("Wystąpil blad: ", e)
         print(komunikat)
-    return opis.text
+    opis = opis.text
+    opis = "".join([s for s in opis.splitlines(True) if s.strip()]) #usuniecie pustych linii z opisu
+    return opis
 
 def sprawdzPoprawnoscDanych(dana):
     x = 'Brak informacji'
     if dana == '':
         dana = x
         return dana
-
-def pobierzDaneZPliku(listakontaktow):
-    if os.path.isfile('..\\config\\cont.txt'):
-        with open('..\\config\\cont.txt', 'r', encoding = "utf-8") as zawartosc:
-            for linia in zawartosc:
-                linia = linia.replace("\n", "") #usuwa znaki konca linii
-                linia = linia.replace("\r", "") #usuwa znaki konca linii
-                listakontaktow.append(linia)
-    else:
-        print("Plik z danymi wejściowymi nie istnieje!!!")
-        print("\nByc moze znajduje sie on w blednej lokalizacji lub zostal usuniety")
-        terminate()
-    if len(listakontaktow) == 0: #jezeli lista jest pusta zakoncz działanie programu
-        print("Plik wejsciowy nie zawiera linków wydarzen")
-        terminate()
-    else:
-        return listakontaktow
-    return listakontaktow
 
 def pobierzCalaZawartoscPliku(nazwaPliku):
     with open(nazwaPliku, 'r', encoding = "utf-8") as obiektPliku:

@@ -6,8 +6,8 @@ from modules import modules
 def downloadEvent(browser, listaWydarzen, licznik=1, allWydarzen=1):
     raport = modules.otworzPlikRaportu()  # otwarcie pliku z raportem
 
-    #logownaie do strony
-    modules.logowanieDoStrony(browser)
+    #logownaie do profilu
+    #modules.logowanieDoProfilu(browser)
 
     # pobieranie wydarzeń ze strony
     for wydarzenie in listaWydarzen:
@@ -43,7 +43,7 @@ def downloadEvent(browser, listaWydarzen, licznik=1, allWydarzen=1):
         licznik += 1
 
     modules.zamknijPlikRaportu(raport)
+    browser.close()
     print("\nProgram zakończył pracę\n")
     print("Zgranych wydarzeń: " + str(licznik - 1) + "/" + str(allWydarzen))
     os.system("notepad raport.txt")
-    browser.close()

@@ -1,17 +1,16 @@
-# v 0.9.1_prototype
+# v 0.9.2
 # created by Kamil Kołodziejczyk
 
 from sys import path
-from modules import modules, menu, engine, whatsapp
+from modules import modules, menu, engine
 from selenium.common.exceptions import InvalidArgumentException
-from selenium.webdriver.common.keys import Keys
 from selenium import webdriver
 
 path.append('..\\modules')
-path.append('..\\config')
+#path.append('..\\config')
 
 listaWydarzen = []
-optionsList = [1,2,3,4,8,9,0]
+optionsList = [1,2,3,8,9,0]
 flag = True
 
 menu.wyswietlWstep()
@@ -56,13 +55,9 @@ while flag:
     elif p == 3:
         modules.pobierzLinkiWydarzen(listaWydarzen)
         browser = webdriver.Firefox()
-        modules.logowanieDoStrony(browser, timesleep = 3)
+        modules.logowanieDoProfilu(browser, timesleep = 3)
         for wydarzenie in listaWydarzen:
             browser.execute_script("window.open('{}')".format('{}'.format(wydarzenie)))
-    elif p == 4:
-        ##############################################################################################################
-        #browser = webdriver.Firefox()
-        whatsapp.sendRaportWhatsApp()
     elif p == 8:
         menu.firstUseInstruction()
         input("\nWcisnij Enter aby kontynuowac...")

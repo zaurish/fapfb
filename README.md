@@ -1,23 +1,29 @@
 # fapfb
+ver 0.9.2 August 2020
+
+Hi,
+this is new working wersion fapfb!!!
+Fapfb working only on old (classic) theme facebook.
+
+In this update:
+- fixed bugs
+- deleted need to login to fb. Program immediately starts looking events. You don't need to provide your login details.
+- the program removes empty lines from descriptions 
+
+
 ver 0.9.1_prototype
-Hello
-this is small upadt for fapfb because fb changed some on webside. I'm working on new full update.
+
+this is small update for fapfb because fb changed some on webside. I'm working on new full update.
 Please be carefull because this version has bugs.
 This upadte does that program working.
 
 
 ver 0.9.1 November 2019
 
-Hello in next version fapfb!
-
 In this update:
 - fixed some bugs
 - added 3rd function to open all events in new tabs
 - after works program automatically opens raport file
-
-In future:
-- whutsupp support
-- sending email trought lotus
 
 
 ver 0.9

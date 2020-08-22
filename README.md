@@ -7,8 +7,9 @@ Fapfb working only on old (classic) theme facebook.
 
 In this update:
 - fixed bugs
-- deleted need to login to fb. Program immediately starts looking events. You don't need to provide your login details.
+- deleted need to login to fb. Program immediately starts looking events. You don't need to provide your login details
 - the program removes empty lines from descriptions 
+
 
 
 ver 0.9.1_prototype

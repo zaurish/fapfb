@@ -55,7 +55,7 @@ while flag:
     elif p == 3:
         modules.pobierzLinkiWydarzen(listaWydarzen)
         browser = webdriver.Firefox()
-        modules.logowanieDoProfilu(browser, timesleep = 3)
+        #modules.logowanieDoProfilu(browser, timesleep = 3)
         for wydarzenie in listaWydarzen:
             browser.execute_script("window.open('{}')".format('{}'.format(wydarzenie)))
     elif p == 8:

@@ -11,7 +11,6 @@ In this update:
 - the program removes empty lines from descriptions 
 
 
-
 ver 0.9.1_prototype
 
 this is small update for fapfb because fb changed some on webside. I'm working on new full update.

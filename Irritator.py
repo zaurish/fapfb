@@ -67,8 +67,3 @@ while flag:
     elif p == 0:
         menu.aboutIrritator()
         input("\nWcisnij Enter aby kontynuowac...")
-
-
-
-
-
